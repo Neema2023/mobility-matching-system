@@ -264,15 +264,15 @@ Monitored metrics:
 
 ### Unit Tests
 - Scoring logic
-- matching.test 
+- Matching unit testst 
 - Spatial indexing  
 - Assignment logic  
 - Timeout handling  
 
 ### Integration Tests
 - Ride flow  
-- integration flow  
-- load.test 
+- Integration tests for ride lifecycle  
+- Load testing under concurrent matching 
 
 ### Load Tests
 - Concurrent requests simulation  
@@ -333,33 +333,34 @@ NODE_ENV=development
 
 - Update Driver → `POST /drivers/location`  
 - Create Ride → `POST /rides`
-- Get all Rides → `GET /rides`  
+- Get Rides → `GET /rides`  
 - Find Matches → `GET /match`  
 - Reserve Driver → `POST /match/reserve`  
 - Confirm Match → `POST /match/confirm`
-- Cancel Match->  `POST /match/cancel`
+- Cancel Match-> `POST /match/cancel`
 
 ---
 
 ## ⚖️ Trade-offs
 
 ### Redis + PostgreSQL
-- Faster reads (Redis)  
-- Strong durability (PostgreSQL)  
+Redis is used for low-latency operations such as driver location lookup and distributed locking, because it stores data in memory and supports extremely fast read/write operations.
+PostgreSQL is used for durable storage of rides and assignments to ensure data consistency, auditability, and recovery after system failures. 
 
 ### In-memory events
-- Lightweight  
-- Not durable (future Kafka/RabbitMQ)  
+- Events are kept in-memory to reduce system overhead and improve performance during real-time processing.
+  However, this approach is not durable, meaning events can be lost on crash, which is why a future upgrade to Kafka or RabbitMQ is considered for persistence and replayability.
+  
 
 ---
 
-##  Future Improvements
+## 🚀 Future Improvements
 
-- Kafka event streaming  
-- Dynamic pricing  
-- WebSocket real-time updates  
-- Distributed workers  
-- Advanced routing optimization  
+- Kafka event streaming for durable, scalable event processing and replayability  
+- Dynamic pricing to adjust ride costs based on demand, distance, and supply  
+- WebSocket real-time updates for instant driver-passenger communication  
+- Distributed workers to handle matching at scale under high traffic  
+- Advanced routing optimization using real-time traffic and predictive modeling  
 
 ---
 
