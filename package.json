@@ -1,0 +1,44 @@
+{
+    "name": "mobility-matching-system",
+    "version": "1.0.0",
+    "description": "Real-time mobility matching system (Kigali take-home challenge)",
+    "main": "dist/server.js",
+    "scripts": {
+        "docker:up": "docker compose up -d",
+        "docker:down": "docker compose down",
+        "dev": "npm run docker:up && nodemon src/server.ts",
+        "start": "node dist/server.js",
+        "build": "tsc",
+        "test": "jest"
+    },
+    "keywords": [
+        "mobility",
+        "matching",
+        "redis",
+        "postgres",
+        "real-time"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/uuid": "^10.0.0",
+        "axios": "^1.16.0",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "h3-js": "^4.4.0",
+        "ioredis": "^5.3.2",
+        "pg": "^8.20.0",
+        "uuid": "^14.0.0"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/jest": "^30.0.0",
+        "@types/node": "^25.6.0",
+        "@types/pg": "^8.20.0",
+        "jest": "^30.3.0",
+        "nodemon": "^3.1.14",
+        "ts-jest": "^29.4.9",
+        "ts-node": "^10.9.2",
+        "typescript": "^6.0.3"
+    }
+}
